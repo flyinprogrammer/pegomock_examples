@@ -25,11 +25,11 @@ func NewMockSlackClient(options ...pegomock.Option) *MockSlackClient {
 func (mock *MockSlackClient) SetFailHandler(fh pegomock.FailHandler) { mock.fail = fh }
 func (mock *MockSlackClient) FailHandler() pegomock.FailHandler      { return mock.fail }
 
-func (mock *MockSlackClient) GetUsersInConversation(params *slack.GetUsersInConversationParameters) ([]string, string, error) {
+func (mock *MockSlackClient) GetUsersInConversation(getUsersInConversationParameters *slack.GetUsersInConversationParameters) ([]string, string, error) {
 	if mock == nil {
 		panic("mock must not be nil. Use myMock := NewMockSlackClient().")
 	}
-	params := []pegomock.Param{params}
+	params := []pegomock.Param{getUsersInConversationParameters}
 	result := pegomock.GetGenericMockFrom(mock).Invoke("GetUsersInConversation", params, []reflect.Type{reflect.TypeOf((*[]string)(nil)).Elem(), reflect.TypeOf((*string)(nil)).Elem(), reflect.TypeOf((*error)(nil)).Elem()})
 	var ret0 []string
 	var ret1 string
@@ -85,8 +85,8 @@ type VerifierMockSlackClient struct {
 	timeout                time.Duration
 }
 
-func (verifier *VerifierMockSlackClient) GetUsersInConversation(params *slack.GetUsersInConversationParameters) *MockSlackClient_GetUsersInConversation_OngoingVerification {
-	params := []pegomock.Param{params}
+func (verifier *VerifierMockSlackClient) GetUsersInConversation(getUsersInConversationParameters *slack.GetUsersInConversationParameters) *MockSlackClient_GetUsersInConversation_OngoingVerification {
+	params := []pegomock.Param{getUsersInConversationParameters}
 	methodInvocations := pegomock.GetGenericMockFrom(verifier.mock).Verify(verifier.inOrderContext, verifier.invocationCountMatcher, "GetUsersInConversation", params, verifier.timeout)
 	return &MockSlackClient_GetUsersInConversation_OngoingVerification{mock: verifier.mock, methodInvocations: methodInvocations}
 }
@@ -97,8 +97,8 @@ type MockSlackClient_GetUsersInConversation_OngoingVerification struct {
 }
 
 func (c *MockSlackClient_GetUsersInConversation_OngoingVerification) GetCapturedArguments() *slack.GetUsersInConversationParameters {
-	params := c.GetAllCapturedArguments()
-	return params[len(params)-1]
+	getUsersInConversationParameters := c.GetAllCapturedArguments()
+	return getUsersInConversationParameters[len(getUsersInConversationParameters)-1]
 }
 
 func (c *MockSlackClient_GetUsersInConversation_OngoingVerification) GetAllCapturedArguments() (_param0 []*slack.GetUsersInConversationParameters) {
